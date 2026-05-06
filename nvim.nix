@@ -46,7 +46,7 @@ in
       termguicolors = true;
       mouse = "a";
       cursorline = true;
-      cursorlineopt = "number";  # only the line number highlights, not the text row
+      cursorlineopt = "line"; # highlight full text row, leave line number alone
       splitright = true;
       splitbelow = true;
       updatetime = 250;
@@ -205,23 +205,23 @@ in
         settings.default_component_configs = {
           icon = {
             folder_closed = "+";
-            folder_open   = "-";
-            folder_empty  = "+";
-            default       = " ";
+            folder_open = "-";
+            folder_empty = "+";
+            default = " ";
           };
           modified = {
             symbol = "*";
           };
           git_status.symbols = {
-            added     = "+";
-            modified  = "~";
-            deleted   = "-";
-            renamed   = ">";
+            added = "+";
+            modified = "~";
+            deleted = "-";
+            renamed = ">";
             untracked = "?";
-            ignored   = "i";
-            unstaged  = " ";
-            staged    = "=";
-            conflict  = "!";
+            ignored = "i";
+            unstaged = " ";
+            staged = "=";
+            conflict = "!";
           };
           name = {
             trailing_slash = false;
@@ -229,10 +229,10 @@ in
           };
         };
         settings.window.mappings = {
-          "<space>" = "none";  # free up leader
-          "o"       = "open";
-          "<cr>"    = "open";
-          "u"       = "navigate_up";
+          "<space>" = "none"; # free up leader
+          "o" = "open";
+          "<cr>" = "open";
+          "u" = "navigate_up";
         };
       };
 
@@ -275,10 +275,32 @@ in
           highlight.enable = true;
           indent.enable = true;
           ensure_installed = [
-            "bash" "c" "css" "go" "gomod" "gosum" "html" "javascript" "json"
-            "lua" "markdown" "markdown_inline" "mermaid" "python" "regex"
-            "rust" "scss" "sql" "tsx" "typescript" "vim" "vimdoc" "yaml"
-            "prisma" "dockerfile" "nix"
+            "bash"
+            "c"
+            "css"
+            "go"
+            "gomod"
+            "gosum"
+            "html"
+            "javascript"
+            "json"
+            "lua"
+            "markdown"
+            "markdown_inline"
+            "mermaid"
+            "python"
+            "regex"
+            "rust"
+            "scss"
+            "sql"
+            "tsx"
+            "typescript"
+            "vim"
+            "vimdoc"
+            "yaml"
+            "prisma"
+            "dockerfile"
+            "nix"
           ];
         };
       };
@@ -288,14 +310,14 @@ in
       gitsigns = {
         enable = true;
         settings = {
-          current_line_blame = false;  # no inline blame — use <leader>gb on demand
+          current_line_blame = false; # no inline blame — use <leader>gb on demand
           signs = {
-            add.text          = "+";
-            change.text       = "~";
-            delete.text       = "-";
-            topdelete.text    = "-";
+            add.text = "+";
+            change.text = "~";
+            delete.text = "-";
+            topdelete.text = "-";
             changedelete.text = "~";
-            untracked.text    = "?";
+            untracked.text = "?";
           };
         };
       };
@@ -348,15 +370,15 @@ in
             lsp_fallback = true;
           };
           formatters_by_ft = {
-            typescript       = [ "biome" ];
-            typescriptreact  = [ "biome" ];
-            javascript       = [ "biome" ];
-            javascriptreact  = [ "biome" ];
-            json             = [ "biome" ];
-            python           = [ "black" ];
-            go               = [ "gofumpt" "goimports" ];
-            lua              = [ "stylua" ];
-            nix              = [ "nixpkgs_fmt" ];
+            typescript = [ "biome" ];
+            typescriptreact = [ "biome" ];
+            javascript = [ "biome" ];
+            javascriptreact = [ "biome" ];
+            json = [ "biome" ];
+            python = [ "black" ];
+            go = [ "gofumpt" "goimports" ];
+            lua = [ "stylua" ];
+            nix = [ "nixpkgs_fmt" ];
           };
         };
       };
@@ -365,9 +387,9 @@ in
       lint = {
         enable = true;
         lintersByFt = {
-          typescript      = [ "eslint" ];
+          typescript = [ "eslint" ];
           typescriptreact = [ "eslint" ];
-          javascript      = [ "eslint" ];
+          javascript = [ "eslint" ];
           javascriptreact = [ "eslint" ];
         };
       };
@@ -463,7 +485,7 @@ in
       gopls
       typescript-language-server
       biome
-      vscode-langservers-extracted   # eslint, html, css, json
+      vscode-langservers-extracted # eslint, html, css, json
       tailwindcss-language-server
       pyright
       lua-language-server
