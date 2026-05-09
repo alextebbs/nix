@@ -14,14 +14,14 @@
   '';
 
   # On Linux containers where bash is the login shell, exec into zsh.
-  programs.bash = lib.mkIf pkgs.stdenv.isLinux {
-    enable = true;
-    initExtra = ''
-      if [[ -x "$HOME/.nix-profile/bin/zsh" && -z "$_HM_ZSH_EXEC" ]]; then
+  home.file = lib.mkIf pkgs.stdenv.isLinux {
+    ".profile".text = ''
+      if [ -x "$HOME/.nix-profile/bin/zsh" ] && [ -z "$_HM_ZSH_EXEC" ]; then
         export _HM_ZSH_EXEC=1
         exec "$HOME/.nix-profile/bin/zsh" -l
       fi
     '';
+    ".profile".force = true;
   };
 
   home.packages = with pkgs; [
