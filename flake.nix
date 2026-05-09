@@ -15,19 +15,31 @@
 
   outputs = { nixpkgs, home-manager, nixvim, ... }:
     let
-      system = "aarch64-darwin";
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfreePredicate = pkg:
-          builtins.elem (pkgs.lib.getName pkg) [ "claude-code" ];
-      };
+      mkHome = { system, username, homeDirectory }:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfreePredicate = pkg:
+              builtins.elem (pkgs.lib.getName pkg) [ "claude-code" ];
+          };
+        in home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit username homeDirectory; };
+          modules = [
+            nixvim.homeManagerModules.nixvim
+            ./home.nix
+          ];
+        };
     in {
-      homeConfigurations."alextebbs" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          nixvim.homeManagerModules.nixvim
-          ./home.nix
-        ];
+      homeConfigurations."alextebbs" = mkHome {
+        system = "aarch64-darwin";
+        username = "alextebbs";
+        homeDirectory = "/Users/alextebbs";
+      };
+      homeConfigurations."squire" = mkHome {
+        system = "x86_64-linux";
+        username = "squire";
+        homeDirectory = "/home/squire";
       };
     };
 }

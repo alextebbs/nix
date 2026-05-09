@@ -1,8 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, username, homeDirectory, ... }: {
   imports = [ ./nvim.nix ];
 
-  home.username = "alextebbs";
-  home.homeDirectory = "/Users/alextebbs";
+  home.username = username;
+  home.homeDirectory = homeDirectory;
   home.stateVersion = "24.11";
 
   home.packages = with pkgs; [
@@ -155,6 +155,7 @@
         name = "alextebbs";
         email = "alex@alextebbs.com";
       };
+    } // pkgs.lib.optionalAttrs pkgs.stdenv.isDarwin {
       "url \"git@github.com:\"" = {
         insteadOf = "https://github.com/";
       };
@@ -167,7 +168,8 @@
     oh-my-zsh = {
       enable = true;
       theme = "";
-      plugins = [ "git" "gulp" "vi-mode" "colorize" "web-search" "z" "macos" ];
+      plugins = [ "git" "gulp" "vi-mode" "colorize" "web-search" "z" ]
+      ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [ "macos" ];
     };
 
     shellAliases = {
@@ -196,7 +198,7 @@
         zle -N down-line-or-beginning-search
         bindkey "''${terminfo[kcud1]}" down-line-or-beginning-search
       fi
-
+    '' + pkgs.lib.optionalString pkgs.stdenv.isDarwin ''
       # NVM (from Homebrew)
       [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
       [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
