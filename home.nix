@@ -4,7 +4,14 @@
   home.username = username;
   home.homeDirectory = homeDirectory;
   home.stateVersion = "24.11";
-  home.backupFileExtension = "hm-backup";
+
+  # Remove pre-existing dotfiles that home-manager wants to manage,
+  # so activation doesn't fail with "would be clobbered".
+  home.activation.removeConflicting = pkgs.lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+    for f in .zshrc .zshenv .bashrc .profile; do
+      [ -f "${homeDirectory}/$f" ] && [ ! -L "${homeDirectory}/$f" ] && rm -f "${homeDirectory}/$f"
+    done
+  '';
 
   home.packages = with pkgs; [
     claude-code
