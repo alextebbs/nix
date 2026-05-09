@@ -1,4 +1,4 @@
-{ pkgs, username, homeDirectory, ... }: {
+{ pkgs, lib, username, homeDirectory, ... }: {
   imports = [ ./nvim.nix ];
 
   home.username = username;
@@ -7,7 +7,7 @@
 
   # Remove pre-existing dotfiles that home-manager wants to manage,
   # so activation doesn't fail with "would be clobbered".
-  home.activation.removeConflicting = pkgs.lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
+  home.activation.removeConflicting = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
     for f in .zshrc .zshenv .bashrc .profile; do
       [ -f "${homeDirectory}/$f" ] && [ ! -L "${homeDirectory}/$f" ] && rm -f "${homeDirectory}/$f"
     done
