@@ -4,6 +4,7 @@
   home.username = username;
   home.homeDirectory = homeDirectory;
   home.stateVersion = "24.11";
+  home.backupFileExtension = "hm-backup";
 
   home.packages = with pkgs; [
     claude-code
