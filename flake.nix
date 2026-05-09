@@ -37,7 +37,7 @@
         homeDirectory = "/Users/alextebbs";
       };
       homeConfigurations."squire" = mkHome {
-        system = "x86_64-linux";
+        system = "aarch64-linux";
         username = "squire";
         homeDirectory = "/home/squire";
       };
