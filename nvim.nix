@@ -1,16 +1,4 @@
 { pkgs, ... }:
-let
-  claudecode-nvim = pkgs.vimUtils.buildVimPlugin {
-    pname = "claudecode.nvim";
-    version = "unstable-2026-04-15";
-    src = pkgs.fetchFromGitHub {
-      owner = "coder";
-      repo = "claudecode.nvim";
-      rev = "main";
-      hash = "sha256-h8wYaWBKjKrb7hYYKYs5yUS5RI0JVFo8Emcy99YK6Qw=";
-    };
-  };
-in
 {
   programs.nixvim = {
     enable = true;
@@ -173,10 +161,6 @@ in
       # ===== Theme toggle (Brodiac dark <-> Brodiac light) =====
       { mode = "n"; key = "<leader>th"; action = "<cmd>lua vim.o.background = vim.o.background == 'dark' and 'light' or 'dark'; vim.cmd.colorscheme('brodiac')<CR>"; options.desc = "Toggle theme"; }
 
-      # ===== Claude Code =====
-      { mode = "n"; key = "<leader>cc"; action = "<cmd>ClaudeCode<CR>"; options.desc = "Toggle Claude Code"; }
-      { mode = "n"; key = "<leader>cf"; action = "<cmd>ClaudeCodeFocus<CR>"; options.desc = "Focus Claude Code"; }
-      { mode = "v"; key = "<leader>cs"; action = "<cmd>ClaudeCodeSend<CR>"; options.desc = "Send selection to Claude"; }
     ];
 
     colorschemes = { };
@@ -429,18 +413,13 @@ in
     };
 
     extraPlugins = [
-      # plenary is a dep of telescope + claudecode; nixvim pulls it but safe to list
       pkgs.vimPlugins.plenary-nvim
       pkgs.vimPlugins.vim-tmux-navigator
-      claudecode-nvim
     ];
 
     extraConfigLua = ''
       -- Brodiac colorscheme
       vim.cmd.colorscheme("brodiac")
-
-      -- claudecode.nvim
-      require("claudecode").setup({})
 
       -- Diagnostics: NO inline rendering. Signs in gutter + underline only.
       -- Hover a diagnostic with `<leader>e` or `K` to read the message.
