@@ -7,7 +7,7 @@ let
       owner = "coder";
       repo = "claudecode.nvim";
       rev = "main";
-      hash = "sha256-r8hAUpSsr8zNm+av8Mu5oILaTfEsXEnJmkzRmvi9pF8=";
+      hash = "sha256-h8wYaWBKjKrb7hYYKYs5yUS5RI0JVFo8Emcy99YK6Qw=";
     };
   };
 in
