@@ -255,37 +255,16 @@
       # ===== Syntax =====
       treesitter = {
         enable = true;
+        nixGrammars = true;
+        grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+          bash c css go gomod gosum html javascript json lua
+          markdown markdown_inline mermaid python regex rust
+          scss sql tsx typescript vim vimdoc yaml prisma
+          dockerfile nix
+        ];
         settings = {
           highlight.enable = true;
           indent.enable = true;
-          ensure_installed = [
-            "bash"
-            "c"
-            "css"
-            "go"
-            "gomod"
-            "gosum"
-            "html"
-            "javascript"
-            "json"
-            "lua"
-            "markdown"
-            "markdown_inline"
-            "mermaid"
-            "python"
-            "regex"
-            "rust"
-            "scss"
-            "sql"
-            "tsx"
-            "typescript"
-            "vim"
-            "vimdoc"
-            "yaml"
-            "prisma"
-            "dockerfile"
-            "nix"
-          ];
         };
       };
       treesitter-context.enable = false;
