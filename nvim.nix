@@ -257,14 +257,14 @@
         enable = true;
         nixGrammars = true;
         grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-          bash c css go gomod gosum html javascript json lua
-          markdown markdown_inline mermaid python regex rust
-          scss sql tsx typescript vim vimdoc yaml prisma
-          dockerfile nix
+          go gomod gosum typescript tsx javascript json yaml
+          html css proto markdown markdown_inline bash
+          python dockerfile toml
         ];
         settings = {
           highlight.enable = true;
           indent.enable = true;
+          auto_install = true;
         };
       };
       treesitter-context.enable = false;
