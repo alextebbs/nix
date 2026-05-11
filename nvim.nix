@@ -185,6 +185,7 @@
         filesystem = {
           followCurrentFile.enabled = true;
           useLibuvFileWatcher = true;
+          filtered_items.visible = true;
         };
         settings.default_component_configs = {
           icon = {
